@@ -1,6 +1,4 @@
-const Feedback = ({ good, neutral, bad, totalFeedback }) => {
-  const positiveRelation = Math.round((good / totalFeedback) * 100);
-
+const Feedback = ({ good, neutral, bad, positiveRelation }) => {
   return (
     <div>
       <h2>Feedback</h2>

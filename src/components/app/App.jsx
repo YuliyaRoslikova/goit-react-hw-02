@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
 import Feedback from './feedback/Feedback';
 import Options from './options/Options';
+import Description from './description/Description';
+import Notification from './notification/Notification';
 
 const initState = {
   good: 0,
   neutral: 0,
   bad: 0,
+};
+
+const descriptionProps = {
+  title: 'Sip Happens Café',
+  description:
+    'Please leave your feedback about our service by selecting one of the options below.',
 };
 
 const App = () => {
@@ -31,16 +39,16 @@ const App = () => {
   };
 
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positiveRelation = Math.round((feedback.good / totalFeedback) * 100);
 
   return (
     <div>
-      <h1>Sip Happens Café</h1>
-      <p>Please leave your feedback about our service by selecting one of the options below.</p>
+      <Description {...descriptionProps} />
       <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} />
       {totalFeedback !== 0 ? (
-        <Feedback {...feedback} totalFeedback={totalFeedback} />
+        <Feedback {...feedback} positiveRelation={positiveRelation} />
       ) : (
-        <span>No feedback yet</span>
+        <Notification message="No feedback yet" />
       )}
     </div>
   );
